@@ -9,19 +9,10 @@ import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+
+import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -58,7 +49,27 @@ public class BatchSortedFileProducer {
                                             IStreamWrapper wrapper) throws IOException {
 
         // TODO: ADD YOUR CODE HERE
-        return null;
+        BufferedReader bfr =  new BufferedReader(new FileReader(csvFile));
+        List<List<String>> filecontent = new ArrayList<>();
+        List<File> tempfiles = new ArrayList<File>();
+        for (int j = 0; j < 5; j++) {
+            filecontent.add(new ArrayList<>()); // 分成5个文件
+            for (int k = 0; k < 10; k++) {  // 每个文件10行
+                String key1 = String.valueOf((int)(Math.random()*100));
+                filecontent.get(filecontent.size()-1).add(key1);
+            }
+            // Collections.sort(filecontent.get(filecontent.size()-1),cmp); // 为每个文件中的内容进行排序
+            File tmp = File.createTempFile("testTmp_"+ j,".csv");
+            System.out.println(tmp.getPath());
+            try (PrintWriter writer = new PrintWriter(new FileWriter(tmp.getPath()))) {
+                for (String  line : filecontent.get(filecontent.size()-1)) {
+                    writer.println(line);
+                }
+            }
+            //tmp.deleteOnExit();
+            tempfiles.add(tmp);
+        }
+        return tempfiles;
     }
 
     /**

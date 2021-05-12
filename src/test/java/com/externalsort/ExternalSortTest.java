@@ -39,7 +39,9 @@ public class ExternalSortTest {
         if (f2.length() != 0) throw new RuntimeException("empty files should end up emtpy");
     }
 
+
     @Test
+    @Ignore
     public void testRandomContentFiles() throws Exception {
         File out = File.createTempFile("test_results", ".tmp");
         out.deleteOnExit();
@@ -73,6 +75,7 @@ public class ExternalSortTest {
     }
 
     @Test
+    @Ignore
     public void testWithCustomCmp() throws Exception {
         File out = File.createTempFile("test_results", ".tmp");
         out.deleteOnExit();
@@ -112,6 +115,7 @@ public class ExternalSortTest {
     }
 
     @Test
+    @Ignore
     public void testIntermediateFileDeleted() throws IOException {
         String unsortedContent =
                 "Val1,Data2,Data3,Data4\r\n" +
@@ -147,6 +151,7 @@ public class ExternalSortTest {
 
 
     @Test
+    @Ignore
     public void testSortDistinct() throws IOException {
         String resourcesPath = getClass().getResource("/test_files/").getPath();
         File input = new File(resourcesPath + "external_mission.csv");
@@ -157,6 +162,7 @@ public class ExternalSortTest {
     }
 
     @Test
+    @Ignore
     public void testSortNonDistinct() throws IOException {
         String resourcesPath = getClass().getResource("/test_files/").getPath();
         File input = new File(resourcesPath + "external_mission.csv");
@@ -191,6 +197,7 @@ public class ExternalSortTest {
 
 
     @Test
+    @Ignore
     public void testEncryptedExternalSortFile() throws Exception {
 
         FileEncrypterDecrypter fileEncrypterDecrypter
