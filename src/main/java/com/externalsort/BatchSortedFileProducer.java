@@ -52,6 +52,7 @@ public class BatchSortedFileProducer {
         BufferedReader bfr =  new BufferedReader(new FileReader(csvFile));
         List<List<String>> filecontent = new ArrayList<>();
         List<File> tempfiles = new ArrayList<File>();
+        long blockSize = estimateBestSizeOfBlocks(estimateAvailableMemory()); // 由这个函数来评估最优的run大小
         for (int j = 0; j < 5; j++) {
             filecontent.add(new ArrayList<>()); // 分成5个文件
             for (int k = 0; k < 10; k++) {  // 每个文件10行
@@ -88,7 +89,24 @@ public class BatchSortedFileProducer {
                                           File tmpFolderPath, boolean isDistinct, CSVFormat csvFormat,
                                           IStreamWrapper wrapper) throws IOException {
         // TODO: ADD YOUR CODE HERE
-        return null;
+        Collections.sort(tmpList,cmp);
+        File tmpFile = File.createTempFile("sortInBatch",".run",tmpFolderPath);
+        CSVRecord lastLine = null;
+        try (CSVPrinter printer = new CSVPrinter(new BufferedWriter(
+                new OutputStreamWriter(wrapper.wrap(new FileOutputStream(tmpFile)))),csvFormat)) {
+            for (CSVRecord csvrecord : tmpList) {
+                if (csvrecord == null) {
+                    throw new IllegalStateException("INVALID AREA");
+                }
+                if (isDistinct && (lastLine != null && cmp.compare(csvrecord,lastLine) ==0)) { // isDistinct 标识是否是唯一键
+                    LOG.warn("skip one line because key is not distinct {} ",csvrecord.toString());
+                } else {
+                    printer.printRecord(csvrecord);
+                    lastLine = csvrecord;
+                }
+            }
+        }
+        return tmpFile;
     }
 
     /**
