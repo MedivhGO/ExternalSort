@@ -49,28 +49,45 @@ public class BatchSortedFileProducer {
                                             IStreamWrapper wrapper) throws IOException {
 
         // TODO: ADD YOUR CODE HERE
-        BufferedReader bfr =  new BufferedReader(new FileReader(csvFile));
-        List<List<String>> filecontent = new ArrayList<>();
-        List<File> tempfiles = new ArrayList<File>();
+        List<File> files = new ArrayList<>();
         long blockSize = estimateBestSizeOfBlocks(estimateAvailableMemory()); // 由这个函数来评估最优的run大小
-        for (int j = 0; j < 5; j++) {
-            filecontent.add(new ArrayList<>()); // 分成5个文件
-            for (int k = 0; k < 10; k++) {  // 每个文件10行
-                String key1 = String.valueOf((int)(Math.random()*100));
-                filecontent.get(filecontent.size()-1).add(key1);
-            }
-            // Collections.sort(filecontent.get(filecontent.size()-1),cmp); // 为每个文件中的内容进行排序
-            File tmp = File.createTempFile("testTmp_"+ j,".csv");
-            System.out.println(tmp.getPath());
-            try (PrintWriter writer = new PrintWriter(new FileWriter(tmp.getPath()))) {
-                for (String  line : filecontent.get(filecontent.size()-1)) {
-                    writer.println(line);
+        /*
+        * AtomicLong是作用是对长整形进行原子操作。
+        * 在32位操作系统中，64位的long 和 double 变量由于会被JVM当作两个分离的32位来进行操作，所以不具有原子性。
+        * 而使用AtomicLong能让long的操作保持原子型。
+        * */
+        AtomicLong currentBlock = new AtomicLong(0);
+        List<CSVRecord> tmpList = new ArrayList<CSVRecord>();  //存放放入run中的record list
+        AtomicInteger cnt = new AtomicInteger(0);
+
+        // 读取给定的CSV文件,只读取给定的块大小
+        try (CSVParser parser = new CSVParser(new BufferedReader(
+                new InputStreamReader(wrapper.wrap(new FileInputStream(csvFile)), cs)),
+                CSVFormat.DEFAULT)) {
+            parser.spliterator().forEachRemaining(e -> {
+                cnt.getAndIncrement(); // cnt 变量加1
+                if (currentBlock.get() < blockSize) {
+                    if (e.getRecordNumber() <= excludeHeaderLines) {
+
+                    } else {
+
+                    }
+
+                } else {
+                    try {
+
+                    } catch (Exception e1) {
+
+                    }
+                    tmpList.clear();
+                    currentBlock.getAndSet(0);
                 }
-            }
-            //tmp.deleteOnExit();
-            tempfiles.add(tmp);
+            });
         }
-        return tempfiles;
+        if (!tmpList.isEmpty()) {
+            files.add(sortSingleTmpFile(tmpList, cmp, tmpDirectory, isDistinct, csvFormat, wrapper)); // 对内存中的record进行排序
+        }
+        return files;
     }
 
     /**
