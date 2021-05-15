@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9e16c421-d7bf-4d75-9c2b-89c332d56a67" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalsort.iml" beforeDir="false" afterPath="$PROJECT_DIR$/externalsort.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/externalsort/BatchSortedFileProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/externalsort/BatchSortedFileProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/externalsort/BatchSortedFileProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/externalsort/BatchSortedFileProducer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620913908281</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="write sortCsvInBatch">
+      <created>1621005232539</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1621005232539</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -382,7 +391,8 @@
     <MESSAGE value="add jar" />
     <MESSAGE value="try sortCsvInBatch function" />
     <MESSAGE value="finish sortSingecsvfile function" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish sortSingecsvfile function" />
+    <MESSAGE value="write sortCsvInBatch" />
+    <option name="LAST_COMMIT_MESSAGE" value="write sortCsvInBatch" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

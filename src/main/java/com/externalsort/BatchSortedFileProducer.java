@@ -56,7 +56,7 @@ public class BatchSortedFileProducer {
         * 在32位操作系统中，64位的long 和 double 变量由于会被JVM当作两个分离的32位来进行操作，所以不具有原子性。
         * 而使用AtomicLong能让long的操作保持原子型。
         * */
-        AtomicLong currentBlock = new AtomicLong(0);
+        AtomicLong currentBlock = new AtomicLong(0); // 记录当前已经读取到的块数,以字节为单位
         List<CSVRecord> tmpList = new ArrayList<CSVRecord>();  //存放放入run中的record list
         AtomicInteger cnt = new AtomicInteger(0);
 
@@ -66,18 +66,20 @@ public class BatchSortedFileProducer {
                 CSVFormat.DEFAULT)) {
             parser.spliterator().forEachRemaining(e -> {
                 cnt.getAndIncrement(); // cnt 变量加1
-                if (currentBlock.get() < blockSize) {
-                    if (e.getRecordNumber() <= excludeHeaderLines) {
-
-                    } else {
-
+                if (currentBlock.get() < blockSize) { // 当前得到的块数小于blockSize,最后一次读
+                    if (e.getRecordNumber() <= excludeHeaderLines) { // 读的只剩headerlines了
+                        // csv 中的头headline
+                        LOG.info("skip one header line because key is not distinct {}", e.toString());
+                    } else { // 除了headerlines还有其他数据
+                        tmpList.add(e);
+                        currentBlock.addAndGet(SizeCalculator.estimatedSizeOf(e));
                     }
-
-                } else {
+                } else { // 当前得到的块数 大于blockSize
                     try {
-
+                        tmpList.add(e);
+                        files.add(sortSingleTmpFile(tmpList,cmp,tmpDirectory,isDistinct,csvFormat,wrapper));
                     } catch (Exception e1) {
-
+                        LOG.warn("Error during the sort in batch",e1);
                     }
                     tmpList.clear();
                     currentBlock.getAndSet(0);
