@@ -22,56 +22,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="file://D:/commons-csv-1.8" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="file://D:/commons-csv-1.8/apidocs" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="file://D:/commons-csv-1.8" />
-        </SOURCES>
-        <jarDirectory url="file://D:/commons-csv-1.8" recursive="false" />
-        <jarDirectory url="file://D:/commons-csv-1.8" recursive="false" type="SOURCES" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES />
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://D:/guava-19.0/guava-gwt/src" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super/com/google/common/base/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super/com/google/common/cache/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super/com/google/common/collect/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super/com/google/common/escape/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super/com/google/common/io/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super/com/google/common/math/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super/com/google/common/primitives/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/src-super/com/google/common/util/concurrent/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/base/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/cache/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/collect/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/collect/testing/google/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/collect/testing/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/io/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/math/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/net/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/primitives/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/testing/super" />
-          <root url="file://D:/guava-19.0/guava-gwt/test-super/com/google/common/util/concurrent/super" />
-          <root url="file://D:/guava-19.0/guava-testlib/src" />
-          <root url="file://D:/guava-19.0/guava-testlib/test" />
-          <root url="file://D:/guava-19.0/guava-tests/benchmark" />
-          <root url="file://D:/guava-19.0/guava-tests/test" />
-          <root url="file://D:/guava-19.0/guava/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: org.apache.commons:commons-csv:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.6.4" level="project" />
