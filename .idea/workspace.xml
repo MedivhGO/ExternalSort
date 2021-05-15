@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e16c421-d7bf-4d75-9c2b-89c332d56a67" name="Default Changelist" comment="">
+    <list default="true" id="9e16c421-d7bf-4d75-9c2b-89c332d56a67" name="Default Changelist" comment="finish sortCsvInBatch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalsort.iml" beforeDir="false" afterPath="$PROJECT_DIR$/externalsort.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/externalsort/BatchSortedFileProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/externalsort/BatchSortedFileProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/externalsort/SortedFilesMerger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/externalsort/SortedFilesMerger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/externalsort/ExternalSortTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/externalsort/ExternalSortTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/externalsort/BatchSortedFileProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/externalsort/BatchSortedFileProducer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/externalsort/ExternalSortTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/externalsort/ExternalSortTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621005232539</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="finish sortCsvInBatch">
+      <created>1621091318874</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621091318874</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -392,7 +400,8 @@
     <MESSAGE value="try sortCsvInBatch function" />
     <MESSAGE value="finish sortSingecsvfile function" />
     <MESSAGE value="write sortCsvInBatch" />
-    <option name="LAST_COMMIT_MESSAGE" value="write sortCsvInBatch" />
+    <MESSAGE value="finish sortCsvInBatch" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish sortCsvInBatch" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

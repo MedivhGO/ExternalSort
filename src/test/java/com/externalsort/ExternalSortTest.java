@@ -197,7 +197,7 @@ public class ExternalSortTest {
 
 
     @Test
-    @Ignore
+    // @Ignore
     public void testEncryptedExternalSortFile() throws Exception {
 
         FileEncrypterDecrypter fileEncrypterDecrypter

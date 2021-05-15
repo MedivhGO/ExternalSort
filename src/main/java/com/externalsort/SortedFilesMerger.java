@@ -122,6 +122,7 @@ public class SortedFilesMerger {
         }
     }
 
+
     public static long mergeSortedCsvFiles(List<File> csvFiles, File outputFile, CSVFormat csvFormat,
                                            final Comparator<CSVRecord> cmp,
                                            boolean isDinstinct, boolean isAppend) throws IOException {
@@ -132,7 +133,51 @@ public class SortedFilesMerger {
                                          Comparator<CSVRecord> cmp, boolean isDinstinct, CSVFormat csvFormat)
             throws IOException {
         // TODO: ADD YOUR CODE HERE
-        long fileLines = 0;
-        return fileLines;
+
+        PriorityQueue<CsvFilelineStack> pq = new PriorityQueue<>(
+                new Comparator<CsvFilelineStack>() {
+                    @Override
+                    public int compare(CsvFilelineStack i, CsvFilelineStack j) {
+                        return cmp.compare(i.peek(),j.peek()); // 比较每个文件栈顶,也就是最后一个元素的大小
+                    }
+                }
+        ); //使用给定的比较器进行排序,小顶堆
+        for (CsvFilelineStack csvFilelineStack : csvList) { // 将每个run入堆
+            if (!csvFilelineStack.empty()){
+                pq.add(csvFilelineStack);
+            }
+        }
+        long rowCnt = 0;
+        CSVPrinter printer = new CSVPrinter(bufferedWriter, csvFormat);
+        CSVRecord lastLine = null;
+        try {
+            while (!pq.isEmpty()) {
+                CsvFilelineStack csvFileLines = pq.poll(); // 获取并删除队首元素, 得到所有run文件中,record最小的那个
+                CSVRecord curLine = csvFileLines.pop(); // 获取当前文件的第一个record
+                if (curLine == null) {
+                    throw new IllegalStateException("INVALID AREA");
+                }
+                if (isDinstinct && (lastLine != null && cmp.compare(curLine, lastLine) == 0)) {
+                    LOG.warn("skip one line because key is not distinct {}", curLine.toString());
+                } else {
+                    printer.printRecord(curLine); // 将这个record打印到文件中
+                    lastLine = curLine;
+                    rowCnt++;
+                }
+                if (csvFileLines.empty()) {
+                    csvFileLines.close();
+                } else {
+                    pq.offer(csvFileLines); /*boolean offer(Object e);
+                    // 将指定元素加入此队列的尾部。当使用有容量限制的队列时，此方法通常比add(Object e)方法更好。*/
+                }
+            }
+        } finally {
+            printer.close();
+            bufferedWriter.close();
+            for (CsvFilelineStack bfb : pq) {
+                bfb.close();
+            }
+        }
+        return rowCnt;
     }
 }
